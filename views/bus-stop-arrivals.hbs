@@ -1,0 +1,15 @@
+<div class="bus-stop-arrivals">
+	<h1>{{arrivals.BusStopCode}}</h1>
+	<a href="/bus-stop/generate/46069">Get QR Code</a>
+
+	<div class="services">
+		{{#each arrivals.Services}}
+			<div class="service">
+				<h2>{{ServiceNo}}</h2>
+				<div class="next-bus">{{estWait NextBus.EstimatedArrival}}</div>
+				<div class="next-bus">{{estWait NextBus2.EstimatedArrival}}</div>
+				<div class="next-bus">{{estWait NextBus3.EstimatedArrival}}</div>
+			</div>
+		{{/each}}
+	</div>
+</div>

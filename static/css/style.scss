@@ -1,0 +1,55 @@
+html {
+	font-size: 12.5px;
+}
+
+body {
+	font-size: 125%;
+	font-family: Helvetica, sans-serif;
+}
+
+a:link,
+a:visited {
+	color: #f00;
+}
+
+div.container {
+	width: 90%;
+	margin: 2em auto;
+
+	img {
+		max-width: 100%;
+	}
+}
+
+.bus-stop-arrivals {
+	width: 100%;
+
+	> h1 {
+		font-size: 4em;
+		line-height: 1;
+		margin: 0;
+	}
+
+	.services {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
+		.service {
+			width: 47%;
+			margin: 1em 0;
+			border-top: 4px solid #000;
+			padding-top: 0.5em;
+
+			> h2 {
+				font-size: 3em;
+				line-height: 1;
+				margin: 0.1em 0 0.3em 0;
+			}
+
+			div.next-bus {
+				font-size: 1.2em;
+			}
+		}
+	}
+}
