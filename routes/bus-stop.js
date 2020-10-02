@@ -3,13 +3,12 @@ const router = express.Router();
 const qr = require("qrcode");
 const { BSA, BSI } = require("../controllers/fetch-bus-stop-arrivals");
 
-router.get("/info", (req, res) => {
-	BSI()
-	.then((results) => {
-		res.json(results);
-	});
-});
-
+// router.get("/info", (req, res) => {
+// 	BSI()
+// 	.then((results) => {
+// 		res.json(results);
+// 	});
+// });
 
 router.get("/:busStopCode", (req, res) => {
 	BSA(req.params.busStopCode)
@@ -20,7 +19,6 @@ router.get("/:busStopCode", (req, res) => {
 			var thisBusStop = busStopInfoResults.find((a) => {
 				return parseInt(a.BusStopCode) == parseInt(req.params.busStopCode);
 			});
-
 
 			if (!!thisBusStop) {
 				res.render("bus-stop-arrivals", {

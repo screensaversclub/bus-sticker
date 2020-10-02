@@ -2,10 +2,23 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const exphbs = require("exphbs");
+const winston = require("winston");
+
+const logger = winston.createLogger({
+	level: "info",
+	transports: [new winston.transports.File({ filename: "usage.log" })],
+});
 
 app.engine("hbs", exphbs);
 app.set("view engine", "hbs");
 app.set("view options", { layout: "main" });
+
+app.use((req, res, next) => {
+	if (req.url.indexOf("bus-stop") > -1) {
+		logger.log("info", { url: req.url, date: new Date() });
+	}
+	next();
+});
 
 app.use("/", express.static("static"));
 app.use("/bus-stop", require("./routes/bus-stop"));
