@@ -1,5 +1,6 @@
 html {
-  font-size: 12.5px; }
+  font-size: 12.5px;
+  min-height: 100%; }
 
 body {
   font-size: 125%;
@@ -9,7 +10,7 @@ body {
 
 a:link,
 a:visited {
-  color: #e63946; }
+  color: #457b9d; }
 
 div.container {
   width: 90%;
@@ -22,12 +23,21 @@ div.container {
   .bus-stop-arrivals > h1 {
     font-size: 4em;
     line-height: 1;
+    padding: 0.5em 0 0 0;
     margin: 0;
     color: #1d3557; }
+  .bus-stop-arrivals a.button {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #457b9d;
+    border-radius: 4px;
+    padding: 0.7em 0.7em 0.3em 0.7em;
+    margin: 1em 0; }
   .bus-stop-arrivals .services {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    margin: 2em 0 0 0; }
     .bus-stop-arrivals .services .service {
       width: 47%;
       margin: 1em 0;

@@ -1,7 +1,7 @@
 <div class="bus-stop-arrivals">
 	<h1>{{arrivals.BusStopCode}}</h1>
 	<div><span>{{info.Description}}</span></div>
-	<a href="/bus-stop/generate/{{arrivals.BusStopCode}}">Get QR Code</a>
+	<a class="button" href="/bus-stop/generate/{{arrivals.BusStopCode}}">Get QR Code</a>
 
 	<div class="services">
 		{{#each arrivals.Services}}
