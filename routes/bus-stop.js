@@ -1,23 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const qr = require("qrcode");
-const BSA = require("../controllers/fetch-bus-stop-arrivals");
+const { BSA, BSI } = require("../controllers/fetch-bus-stop-arrivals");
+
+router.get("/info", (req, res) => {
+	BSI()
+	.then((results) => {
+		res.json(results);
+	});
+});
+
 
 router.get("/:busStopCode", (req, res) => {
 	BSA(req.params.busStopCode)
 		.then((results) => {
-			// let busStopInfoResults = results[0];
+			let busStopInfoResults = results[0];
 			let arrivalResults = results[1];
 
-			//var thisBusStop = busStopInfoResults.data.value.find((a) => {
-			//	return parseInt(a.BusStopCode) == parseInt(req.params.busStopCode);
-			//});
+			var thisBusStop = busStopInfoResults.find((a) => {
+				return parseInt(a.BusStopCode) == parseInt(req.params.busStopCode);
+			});
 
-			//console.log(thisBusStop);
 
-			if (arrivalResults.data.Services.length > 0) {
+			if (!!thisBusStop) {
 				res.render("bus-stop-arrivals", {
 					arrivals: arrivalResults.data,
+					info: thisBusStop,
 					title: `Bus Stop ${arrivalResults.data.BusStopCode}`,
 				});
 			} else {

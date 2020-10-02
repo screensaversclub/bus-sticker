@@ -5,7 +5,7 @@ const BSA = (busStopCode) => {
 	let arrivalEndpoint = `http://datamall2.mytransport.sg/ltaodataservice/BusArrivalv2?BusStopCode=${busStopCode}`;
 
 	return Promise.all([
-		Promise.resolve(),
+		(BSI())(),
 		axios.get(arrivalEndpoint, {
 			headers: {
 				AccountKey: process.env.DATAMALLKEY,
@@ -15,4 +15,52 @@ const BSA = (busStopCode) => {
 	]);
 };
 
-module.exports = BSA;
+
+const BSI = () => {
+
+
+	var _BSICacheDate = 0;
+	var _BSICache = [];
+
+	return () => {
+
+		return new Promise((resolve, reject) => {
+
+			if (( (new Date()) - _BSICacheDate ) < ( 30 * 60 * 1000 ) && _BSICache.length > 0) { /* 30mins, 60s, 1000ms */
+				resolve(_BSICache);
+				return;
+			}
+
+			let promiseChain = (n, accum) => {
+
+				n = n || 0;
+				accum = accum || [];
+
+				let busStopEndpoint = `http://datamall2.mytransport.sg/ltaodataservice/BusStops?$skip=${(n * 500)}`;
+
+				axios.get(busStopEndpoint, {
+					headers: {
+						AccountKey: process.env.DATAMALLKEY,
+						accept: "application/json",
+					},
+				}).then((response) => {
+					if (response.data.value.length > 0) {
+						promiseChain(n+1, accum.concat(response.data.value));
+					} else {
+						_BSICache = accum;
+						_BSICacheDate = new Date();
+						resolve( _BSICache );
+					}
+
+				}).catch((err) => {
+					reject(err);
+				});
+			};
+
+			promiseChain();
+
+		});
+	}
+}
+
+module.exports = { BSA , BSI : BSI() };
