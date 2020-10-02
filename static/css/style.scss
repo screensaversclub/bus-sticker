@@ -1,3 +1,10 @@
+$red: #e63946;
+$grey: #f1faee;
+$blue1: #a8dadc;
+$blue2: #457b9d;
+$blue3: #1d3557;
+// https://coolors.co/e63946-f1faee-a8dadc-457b9d-1d3557
+
 html {
 	font-size: 12.5px;
 }
@@ -5,11 +12,13 @@ html {
 body {
 	font-size: 125%;
 	font-family: Helvetica, sans-serif;
+	background: $grey;
+	color: $blue3;
 }
 
 a:link,
 a:visited {
-	color: #f00;
+	color: $red;
 }
 
 div.container {
@@ -28,6 +37,7 @@ div.container {
 		font-size: 4em;
 		line-height: 1;
 		margin: 0;
+		color: $blue3;
 	}
 
 	.services {
@@ -38,17 +48,30 @@ div.container {
 		.service {
 			width: 47%;
 			margin: 1em 0;
-			border-top: 4px solid #000;
+			border-top: 4px solid $blue2;
 			padding-top: 0.5em;
 
 			> h2 {
 				font-size: 2em;
 				line-height: 1;
 				margin: 0.1em 0 0.3em 0;
+				color: $blue3;
 			}
 
 			div.next-bus {
-				font-size: 1.0em;
+				font-size: 1em;
+
+				&:nth-child(2) {
+					color: $blue3;
+				}
+
+				&:nth-child(3) {
+					color: $blue2;
+				}
+
+				&:nth-child(4) {
+					color: $blue1;
+				}
 			}
 		}
 	}
